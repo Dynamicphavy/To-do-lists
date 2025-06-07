@@ -10,7 +10,7 @@ document.querySelector("#to_do_add_btn").addEventListener("click", () => {
             <div class="to-do">${to_do_name.value}</div>
             <div class="actions">
                 <span class="done">&#10003;</span>
-                <span class="delete">&#10006;</span>
+                <span class="delete">&#x1f5d1;</span>
             </div>
         </div>`;
     li.innerHTML = liContainer;
