@@ -76,3 +76,9 @@ body {
     background-color: rgb(54, 129, 54);
     color: #fff;
 }
+
+@media screen and (max-width:768px) {
+    .container {
+        width: 90%;
+    }
+}
