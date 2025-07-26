@@ -1,19 +1,21 @@
 document.querySelector("#to_do_add_btn").addEventListener("click", () => {
-    let to_do_name = document.querySelector("#to_do_name");
-    if (to_do_name.value === "") {
+    const input = document.querySelector("#to_do_name");
+    const taskText = input.value.trim();
+
+    if (taskText === "") {
         alert("Please Add your tasks!!");
-        return false;
+        return;
     }
+
     const li = document.createElement("li");
-    let liContainer = `
+    li.innerHTML = `
         <div class="to-do-item">
-            <div class="to-do">${to_do_name.value}</div>
+            <div class="to-do">${taskText}</div>
             <div class="actions">
                 <span class="done">&#10003;</span>
                 <span class="delete">&#x1f5d1;</span>
             </div>
         </div>`;
-    li.innerHTML = liContainer;
 
     li.querySelector(".delete").addEventListener("click", (e) => {
         e.currentTarget.closest("li").remove();
@@ -24,5 +26,12 @@ document.querySelector("#to_do_add_btn").addEventListener("click", () => {
     });
 
     document.querySelector("#to_do_list").appendChild(li);
-    to_do_name.value = "";
-})
+    input.value = "";
+
+    // 🔥 Send task to backend
+    fetch("/api/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ task: taskText, done: false })
+    });
+});
